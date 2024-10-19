@@ -29,6 +29,10 @@ export function generateMessageObjectsFromMetadata (
 		throw new Error('Metadata actions must be an array')
 	}
 
+	if (!metadataObject.actions || metadataObject.actions.length === 0) {
+		return undefined
+	}
+
 	return metadataObject.actions.map((actionDetail: BlockchainAction) => {
 		if (!actionDetail.contractAddress) {
 			throw new Error('Contract address is required for each action')
@@ -58,7 +62,17 @@ export function generateMessageObjectsFromMetadata (
 			}
 		}
 
-		const destinationChain = zeroPad(hexlify(actionDetail.chainId), 32)
+		const chainIdMap: { [key: string]: number } = {
+			Ethereum: 1,
+			Base: 8453,
+			Optimism: 10
+		}
+
+		const chainIdNumber = chainIdMap[actionDetail.chainId]
+		if (!chainIdNumber) {
+			throw new Error(`Invalid chainId: ${actionDetail.chainId}`)
+		}
+		const destinationChain = zeroPad(hexlify(chainIdNumber), 32)
 
 		let encodedFunctionCall
 		try {
