@@ -1,3 +1,4 @@
-export function greet (name: string): string {
-	return `Hello, ${name}! Welcome to the SDK.`
-}
+import { generateMessageObjectsFromMetadata } from '@utils/generateMessageObjectsFromMetadata'
+import { createMetadata } from '@utils/createMetadata'
+
+export { generateMessageObjectsFromMetadata, createMetadata }
