@@ -1,47 +1,51 @@
 {
-	"name": "slinky-sdk",
-	"version": "1.0.0",
-	"description": "",
-	"private": false,
-	"main": "dist/index.js",
-	"types": "dist/index.d.ts",
-	"scripts": {
-		"build": "tsc",
-		"lint": "eslint --fix",
-		"prepare": "husky install",
-		"prepublishOnly": "npm run build",
-		"version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
-	},
-	"keywords": [
-		"sdk",
-		"typescript",
-		"slinky",
-		"api",
-		"integration",
-		"blinks",
-		"blockchain"
-	],
-	"author": {
-		"name": "Franco Carballar",
-		"email": "francocarballar@gmail.com",
-		"url": "https://www.francocarballar.com/"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/francocarballar/slinky-sdk.git"
-	},
-	"homepage": "https://github.com/francocarballar/slinky-sdk#readme",
-	"license": "MIT",
-	"devDependencies": {
-		"@commitlint/cli": "19.5.0",
-		"@commitlint/config-conventional": "19.5.0",
-		"@eslint/js": "9.13.0",
-		"@types/node": "22.7.7",
-		"eslint": "9.13.0",
-		"globals": "15.11.0",
-		"husky": "9.1.6",
-		"ts-node": "10.9.2",
-		"typescript": "5.6.3",
-		"typescript-eslint": "8.10.0"
-	}
+  "name": "slinky-sdk",
+  "version": "1.0.0",
+  "description": "",
+  "private": false,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint --fix",
+    "prepare": "husky install",
+    "prepublishOnly": "npm run build",
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
+  },
+  "keywords": [
+    "sdk",
+    "typescript",
+    "slinky",
+    "api",
+    "integration",
+    "blinks",
+    "blockchain"
+  ],
+  "author": {
+    "name": "Franco Carballar",
+    "email": "francocarballar@gmail.com",
+    "url": "https://www.francocarballar.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/francocarballar/slinky-sdk.git"
+  },
+  "homepage": "https://github.com/francocarballar/slinky-sdk#readme",
+  "license": "MIT",
+  "devDependencies": {
+    "@commitlint/cli": "19.5.0",
+    "@commitlint/config-conventional": "19.5.0",
+    "@eslint/js": "9.13.0",
+    "@types/node": "22.7.7",
+    "eslint": "9.13.0",
+    "globals": "15.11.0",
+    "husky": "9.1.6",
+    "ts-node": "10.9.2",
+    "typescript": "5.6.3",
+    "typescript-eslint": "8.10.0"
+  },
+  "dependencies": {
+    "@ethersproject/bytes": "5.7.0",
+    "ethers": "6.13.4"
+  }
 }
