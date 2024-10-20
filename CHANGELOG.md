@@ -1,3 +1,7 @@
+## [1.0.5](https://github.com/francocarballar/slinky-sdk/compare/v1.0.4...v1.0.5) (2024-10-20)
+
+
+
 ## [1.0.4](https://github.com/francocarballar/slinky-sdk/compare/v1.0.3...v1.0.4) (2024-10-20)
 
 
