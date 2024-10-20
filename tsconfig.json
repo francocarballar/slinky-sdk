@@ -1,17 +1,17 @@
 {
 	"compilerOptions": {
-		"baseUrl": "./src",
+		"baseUrl": ".",
 		"paths": {
 			"@interfaces/*": [
-				"interfaces/*"
+				"src/interfaces/*"
 			],
 			"@utils/*": [
-				"utils/*"
+				"src/utils/*"
 			],
 		},
 		"outDir": "./dist",
 		"rootDir": "./src",
-		"target": "ES6",
+		"target": "ES2015",
 		"module": "CommonJS",
 		"declaration": true,
 		"strict": true,
