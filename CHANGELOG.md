@@ -1,3 +1,20 @@
+# [1.2.0](https://github.com/francocarballar/slinky-sdk/compare/v1.1.0...v1.2.0) (2024-10-20)
+
+
+### Features
+
+* :label: actualiza las interfaces y crea nuevas en blockchainAction ([6b8a790](https://github.com/francocarballar/slinky-sdk/commit/6b8a7901feacdf5b1607724983e2e2244218944b))
+* :label: agrega el tipado y las interfaces para las transacciones ([bbb0d97](https://github.com/francocarballar/slinky-sdk/commit/bbb0d973c6f6840a19b51fbe7b43883095c2ce5f))
+* :necktie: actualiza el encode de generateMessageObjectsFromMetadata ([d1c5e9a](https://github.com/francocarballar/slinky-sdk/commit/d1c5e9a3cc5d25c33f6c3aa4fc17fdd01ec1a4bb))
+* :sparkles: actualiza el función reutilizable de la librería ([438d924](https://github.com/francocarballar/slinky-sdk/commit/438d9248cde4220355187866200093301f4d7db4))
+* :sparkles: actualiza el index para exportar los types e interfaces ([63d3190](https://github.com/francocarballar/slinky-sdk/commit/63d3190c017bd5f9f9d8edb508d9911600cf5749))
+* :sparkles: actualiza las exportaciones dentro del index ([800a11c](https://github.com/francocarballar/slinky-sdk/commit/800a11cda5822196cd629b097caee1b40ce277f5))
+* :sparkles: agrega constantes al proyecto ([522275e](https://github.com/francocarballar/slinky-sdk/commit/522275e781a573c28e252e52fc19b64a64f490b6))
+* :sparkles: agrega una nueva función a la librería llamada generateTransactionData ([943c16d](https://github.com/francocarballar/slinky-sdk/commit/943c16d5263ef2fe5befa44d5ace9df94ebd7983))
+* :sparkles: agrega una nueva función reutilizable llamada extractTransactionArguments ([a10a0a4](https://github.com/francocarballar/slinky-sdk/commit/a10a0a4a6666b6a40eaf89527158559ad12036c8))
+
+
+
 # [1.1.0](https://github.com/francocarballar/slinky-sdk/compare/v1.0.7...v1.1.0) (2024-10-20)
 
 
