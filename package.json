@@ -51,6 +51,7 @@
     "typescript-transform-paths": "3.5.1"
   },
   "dependencies": {
+    "@ethersproject/address": "5.7.0",
     "@ethersproject/bytes": "5.7.0",
     "viem": "2.21.30"
   },

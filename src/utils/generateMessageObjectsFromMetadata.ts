@@ -5,6 +5,7 @@ import { type Metadata, type MessageObject } from '../interfaces/metadata'
 import { type BlockchainAction } from '../interfaces/blockchainAction'
 
 // Modules and libraries
+import { getAddress } from '@ethersproject/address'
 import { hexlify, zeroPad } from '@ethersproject/bytes'
 import { encodeFunctionData } from 'viem'
 
@@ -24,7 +25,7 @@ export function generateMessageObjectsFromMetadata (
 		throw new Error('Metadata actions must be an array')
 	}
 
-	if (!metadataObject.actions || metadataObject.actions.length === 0) {
+	if (metadataObject.actions.length === 0) {
 		return undefined
 	}
 
@@ -32,9 +33,17 @@ export function generateMessageObjectsFromMetadata (
 		if (!action.contractAddress) {
 			throw new Error('Contract address is required for each action')
 		}
-		if (!/^0x[a-fA-F0-9]{40}$/.test(action.contractAddress)) {
-			throw new Error('Invalid contract address format')
+		try {
+			action.contractAddress = getAddress(
+				action.contractAddress
+			) as `0x${string}`
+		} catch (error) {
+			console.error(error)
+			throw new Error(
+				`Invalid contract address format: ${action.contractAddress}`
+			)
 		}
+
 		if (
 			!action.transactionParameters ||
 			!Array.isArray(action.transactionParameters)
@@ -49,11 +58,19 @@ export function generateMessageObjectsFromMetadata (
 			if (!param.type) {
 				throw new Error('Parameter type is required')
 			}
-			if (!['string', 'uint256', 'boolean'].includes(param.type)) {
+			if (!['string', 'uint256', 'boolean', 'address'].includes(param.type)) {
 				throw new Error(`Invalid parameter type: ${param.type}`)
 			}
 			if (param.value === undefined) {
 				throw new Error('Parameter value is required')
+			}
+			if (param.type === 'string') {
+				try {
+					param.value = getAddress(param.value as string)
+				} catch (error) {
+					console.error(error)
+					throw new Error(`Invalid address value: ${param.value}`)
+				}
 			}
 		}
 
@@ -69,16 +86,44 @@ export function generateMessageObjectsFromMetadata (
 		}
 		const destinationChain = zeroPad(hexlify(chainIdNumber), 32)
 
+		// Validate if the ABI is valid
+		if (
+			!action.contractABI ||
+			!Array.isArray(action.contractABI) ||
+			action.contractABI.length === 0
+		) {
+			throw new Error('Invalid or missing contract ABI')
+		}
+
+		// Validate if the function exists in the ABI
+		const functionInABI = action.contractABI.find(
+			item => item.name === action.functionName
+		)
+		if (!functionInABI) {
+			console.error('Provided ABI:', action.contractABI)
+			console.error('Function name:', action.functionName)
+			throw new Error(
+				`Function "${action.functionName}" not found in the provided ABI`
+			)
+		}
+
 		let encodedFunctionCall
 		try {
 			encodedFunctionCall = encodeFunctionData({
 				abi: action.contractABI,
 				functionName: action.functionName,
-				args: action.transactionParameters.map(param => param.type)
+				args: action.transactionParameters.map(param => param.value)
 			})
 		} catch (error) {
 			throw new Error(
-				'Failed to encode function call: ' + (error as Error).message
+				`Failed to encode function call for function "${action.functionName}": ` +
+					(error as Error).message
+			)
+		}
+
+		if (!encodedFunctionCall) {
+			throw new Error(
+				`Encoded function call for "${action.functionName}" resulted in an empty or invalid value.`
 			)
 		}
 
