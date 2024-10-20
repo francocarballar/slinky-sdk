@@ -14,11 +14,11 @@ export interface Metadata<T extends ActionType = 'action'> {
 export type ActionType = 'action' | 'message' | 'post' | 'external-link'
 
 export interface MessageObject {
-	_destinationContract: `0x${string}`
-	_encodedFunctionCall: string
-	_destinationAddress: `0x${string}`
-	_destinationChain: Uint8Array
-	_gasLimit: number
+	destinationContract: `0x${string}`
+	encodedFunctionCall: string
+	destinationAddress: `0x${string}`
+	destinationChain: Uint8Array
+	gasLimit: number
 }
 
 export interface MetadataForMiniapp {

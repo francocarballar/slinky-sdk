@@ -2,14 +2,11 @@
 
 // Types and interfaces
 import { type Metadata, type MessageObject } from '../interfaces/metadata'
-import {
-	type BlockchainAction,
-	type BlockchainParameter
-} from '../interfaces/blockchainAction'
+import { type BlockchainAction } from '../interfaces/blockchainAction'
 
 // Modules and libraries
-import { AbiCoder } from 'ethers'
 import { hexlify, zeroPad } from '@ethersproject/bytes'
+import { encodeFunctionData } from 'viem'
 
 /**
  * @function generateMessageObjectsFromMetadata
@@ -20,8 +17,6 @@ import { hexlify, zeroPad } from '@ethersproject/bytes'
 export function generateMessageObjectsFromMetadata (
 	metadataObject: Metadata
 ): MessageObject[] | undefined {
-	const abiCoder = new AbiCoder()
-
 	if (!metadataObject) {
 		throw new Error('Metadata object is required')
 	}
@@ -33,24 +28,24 @@ export function generateMessageObjectsFromMetadata (
 		return undefined
 	}
 
-	return metadataObject.actions.map((actionDetail: BlockchainAction) => {
-		if (!actionDetail.contractAddress) {
+	return metadataObject.actions.map((action: BlockchainAction) => {
+		if (!action.contractAddress) {
 			throw new Error('Contract address is required for each action')
 		}
-		if (!/^0x[a-fA-F0-9]{40}$/.test(actionDetail.contractAddress)) {
+		if (!/^0x[a-fA-F0-9]{40}$/.test(action.contractAddress)) {
 			throw new Error('Invalid contract address format')
 		}
 		if (
-			!actionDetail.transactionParameters ||
-			!Array.isArray(actionDetail.transactionParameters)
+			!action.transactionParameters ||
+			!Array.isArray(action.transactionParameters)
 		) {
 			throw new Error('Transaction parameters must be an array')
 		}
-		if (!actionDetail.chainId) {
+		if (!action.chainId) {
 			throw new Error('Chain ID is required for each action')
 		}
 
-		for (const param of actionDetail.transactionParameters) {
+		for (const param of action.transactionParameters) {
 			if (!param.type) {
 				throw new Error('Parameter type is required')
 			}
@@ -68,22 +63,19 @@ export function generateMessageObjectsFromMetadata (
 			Optimism: 10
 		}
 
-		const chainIdNumber = chainIdMap[actionDetail.chainId]
+		const chainIdNumber = chainIdMap[action.chainId]
 		if (!chainIdNumber) {
-			throw new Error(`Invalid chainId: ${actionDetail.chainId}`)
+			throw new Error(`Invalid chainId: ${action.chainId}`)
 		}
 		const destinationChain = zeroPad(hexlify(chainIdNumber), 32)
 
 		let encodedFunctionCall
 		try {
-			encodedFunctionCall = abiCoder.encode(
-				actionDetail.transactionParameters.map(
-					(param: BlockchainParameter) => param.type
-				),
-				actionDetail.transactionParameters.map(
-					(param: BlockchainParameter) => param.value
-				)
-			)
+			encodedFunctionCall = encodeFunctionData({
+				abi: action.contractABI,
+				functionName: action.functionName,
+				args: action.transactionParameters.map(param => param.type)
+			})
 		} catch (error) {
 			throw new Error(
 				'Failed to encode function call: ' + (error as Error).message
@@ -91,11 +83,11 @@ export function generateMessageObjectsFromMetadata (
 		}
 
 		return {
-			_destinationContract: actionDetail.contractAddress,
-			_encodedFunctionCall: encodedFunctionCall,
-			_destinationAddress: actionDetail.contractAddress,
-			_destinationChain: destinationChain,
-			_gasLimit: 1000000
+			destinationContract: action.contractAddress,
+			encodedFunctionCall: encodedFunctionCall,
+			destinationAddress: action.contractAddress,
+			destinationChain: destinationChain,
+			gasLimit: 1000000
 		}
 	})
 }
