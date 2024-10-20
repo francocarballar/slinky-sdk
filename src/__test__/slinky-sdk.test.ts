@@ -8,7 +8,7 @@ const validMetadata: Metadata<'action'> = {
 	type: 'action',
 	icon: 'https://example.com/icon.png',
 	title: 'My Miniapp',
-	description: 'This is a test miniapp',
+	description: 'This is a test miniapp - please ignore',
 	label: 'Test App',
 	disabled: false,
 	actions: [
