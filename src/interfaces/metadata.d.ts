@@ -1,4 +1,4 @@
-import { BlockchainAction } from '@interfaces/blockchainAction'
+import { BlockchainAction } from './blockchainAction'
 
 export interface Metadata<T extends ActionType = 'action'> {
 	[key: string]: unknown

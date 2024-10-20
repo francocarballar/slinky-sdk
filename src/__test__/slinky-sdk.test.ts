@@ -1,7 +1,7 @@
 // #region IMPORTS
-import { type Metadata } from '@interfaces/metadata'
-import { createMetadata } from '@utils/createMetadata'
-import { generateMessageObjectsFromMetadata } from '@utils/generateMessageObjectsFromMetadata'
+import { type Metadata } from '../interfaces/metadata'
+import { createMetadata } from '../utils/createMetadata'
+import { generateMessageObjectsFromMetadata } from '../utils/generateMessageObjectsFromMetadata'
 
 // #region TEST DATA
 const validMetadata: Metadata<'action'> = {

@@ -1,11 +1,11 @@
 // #region IMPORTS
 
 // Types and interfaces
-import { type Metadata, type MessageObject } from '@interfaces/metadata'
+import { type Metadata, type MessageObject } from '../interfaces/metadata'
 import {
 	type BlockchainAction,
 	type BlockchainParameter
-} from '@interfaces/blockchainAction'
+} from '../interfaces/blockchainAction'
 
 // Modules and libraries
 import { AbiCoder } from 'ethers'

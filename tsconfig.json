@@ -14,12 +14,7 @@
 		"target": "ES2015",
 		"module": "CommonJS",
 		"declaration": true,
-		"strict": true,
-		"plugins": [
-			{
-				"transform": "typescript-transform-paths"
-			}
-		]
+		"strict": true
 	},
 	"include": [
 		"src/**/*"

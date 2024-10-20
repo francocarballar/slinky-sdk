@@ -1,10 +1,10 @@
 // #region IMPORTS
 
 // Types and interfaces
-import { type Metadata, type MetadataForMiniapp } from '@interfaces/metadata'
+import { type Metadata, type MetadataForMiniapp } from '../interfaces/metadata'
 
 // Modules and libraries
-import { generateMessageObjectsFromMetadata } from '@utils/generateMessageObjectsFromMetadata'
+import { generateMessageObjectsFromMetadata } from '../utils/generateMessageObjectsFromMetadata'
 
 /**
  * @function createMetadata
