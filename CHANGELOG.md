@@ -1,3 +1,17 @@
+## [1.0.2](https://github.com/francocarballar/slinky-sdk/compare/v1.0.3...v1.0.2) (2024-10-20)
+
+
+### Bug Fixes
+
+* :bug: soluciona el problema de las rutas relativas ([f47c5de](https://github.com/francocarballar/slinky-sdk/commit/f47c5de296dd6a21ecca93cbcc553272c61a8d02))
+
+
+### Features
+
+* :package: actualiza el archivo package.json ([8d8af4f](https://github.com/francocarballar/slinky-sdk/commit/8d8af4f91229d50030208628f1a1f7f8f625d9b6))
+
+
+
 ## [1.0.1](https://github.com/francocarballar/slinky-sdk/compare/v1.0.3...v1.0.1) (2024-10-20)
 
 
