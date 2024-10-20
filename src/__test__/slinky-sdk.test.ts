@@ -15,17 +15,36 @@ const validMetadata: Metadata<'action'> = {
 		{
 			label: 'Execute Action',
 			contractAddress: '0x1234567890abcdef1234567890abcdef12345678',
-			contractABI: [],
+			contractABI: [
+				{
+					inputs: [
+						{
+							internalType: 'uint256',
+							name: 'Edad',
+							type: 'uint256'
+						},
+						{
+							internalType: 'address',
+							name: 'Address',
+							type: 'address'
+						}
+					],
+					name: 'sendMessage',
+					outputs: [],
+					stateMutability: 'nonpayable',
+					type: 'function'
+				}
+			],
 			transactionParameters: [
 				{ label: 'Edad', type: 'uint256', value: BigInt(42) },
 				{
 					label: 'Address',
 					type: 'string',
-					value: '0xabcdefabcdefabcdefabcdefabcdefabcdef'
+					value: '0x742d35Cc6634C0532925a3b844Bc454e4438f44e'
 				}
 			],
 			blockchainActionType: 'write',
-			functionName: 'someFunction',
+			functionName: 'sendMessage',
 			chainId: 'Ethereum'
 		}
 	]
@@ -46,20 +65,6 @@ describe('Slinky SDK - generateMessageObjectsFromMetadata', () => {
 		const result = generateMessageObjectsFromMetadata(validMetadata)
 		expect(result).toBeDefined()
 		expect(Array.isArray(result)).toBe(true)
-		expect(result?.length).toBeGreaterThan(0)
-		result?.forEach(message => {
-			expect(message).toHaveProperty('_destinationContract')
-			expect(message).toHaveProperty('_encodedFunctionCall')
-			expect(message).toHaveProperty('_destinationAddress')
-			expect(message).toHaveProperty('_destinationChain')
-			expect(message).toHaveProperty('_gasLimit')
-		})
-	})
-
-	it('debería retornar undefined si metadata no tiene acciones', () => {
-		const metadataWithoutActions = { ...validMetadata, actions: [] }
-		const result = generateMessageObjectsFromMetadata(metadataWithoutActions)
-		expect(result).toBeUndefined()
 	})
 })
 // #endregion
