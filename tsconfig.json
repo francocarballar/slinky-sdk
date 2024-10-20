@@ -14,7 +14,12 @@
 		"target": "ES6",
 		"module": "CommonJS",
 		"declaration": true,
-		"strict": true
+		"strict": true,
+		"plugins": [
+			{
+				"transform": "typescript-transform-paths"
+			}
+		]
 	},
 	"include": [
 		"src/**/*"
