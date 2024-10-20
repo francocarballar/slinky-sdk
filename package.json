@@ -1,6 +1,6 @@
 {
 	"name": "slinky-sdk",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"description": "Slinky SDK es una biblioteca TypeScript que permite a los desarrolladores integrar fácilmente miniaplicaciones con contratos inteligentes en diversas blockchains Layer 1. Esta SDK proporciona funciones para generar metadatos y enviar mensajes cross-chain, facilitando la interoperabilidad entre distintas blockchains.",
 	"private": false,
 	"main": "dist/index.js",

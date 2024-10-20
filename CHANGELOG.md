@@ -1,3 +1,12 @@
+## [1.0.6](https://github.com/francocarballar/slinky-sdk/compare/v1.0.5...v1.0.6) (2024-10-20)
+
+
+### Bug Fixes
+
+* :bug: resuleve problemas o lo intenta ([2b85866](https://github.com/francocarballar/slinky-sdk/commit/2b85866e2b3c1bd747cb41df4d329f8b4fe62efb))
+
+
+
 ## [1.0.5](https://github.com/francocarballar/slinky-sdk/compare/v1.0.4...v1.0.5) (2024-10-20)
 
 
